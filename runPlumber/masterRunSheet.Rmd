@@ -1,0 +1,36 @@
+---
+title: "Seminar: Master Run sheet"
+output: html_notebook
+---
+
+#Iris Tutorial
+```{r}
+pr <- plumber::plumb("irisTutorial.R")
+pr$run(port=8123, host ="129.215.237.1")
+
+```
+
+
+# Run KeyPair Script
+## Using plumb
+```{r}
+pr <- plumber::plumb("keyPair.R")
+pr$run(port=8123, host ="129.215.237.1")
+```
+
+
+## using mount : note that each mount is stateless but independent 
+
+```{r}
+pr1 <- plumber::plumb("keyPair.R")
+pr2 <- plumber::plumb("keyPair.R")
+
+top <- plumber$new()
+top$mount("/level1", pr1)
+top$mount("/level2", pr2)
+top$run(port=8123, host ="129.215.237.1")
+```
+```{r}
+pr <- plumber::plumb("keyPair_unboxed.R")
+pr$run(port=8123, host ="129.215.237.1")
+```
