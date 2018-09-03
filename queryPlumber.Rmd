@@ -2,6 +2,10 @@
 title: "Interrogate plumber"
 output: html_notebook
 ---
+
+
+## Via curl in bash
+
 ```{bash}
 curl "http://129.215.237.1:8123/lookup?key=A"
 ```
@@ -16,7 +20,7 @@ str(content(r))
 
 ```
 
-# Calls to 2 mounted instances  
+## Calls to 2 mounted instances  
 
 ```{bash}
 curl "http://129.215.237.1:8123/level1/lookup?key=Z"
@@ -30,6 +34,9 @@ curl "http://129.215.237.1:8123/level2/lookup?key=Z"
 curl "http://129.215.237.1:8123/level2/lookup?key=Z"
 ```
 
+## Boxed and unboxed json when an atomic vector is returned
+
+Note that there is no difference when lists are returned
 
 ```{bash}
 curl "http://129.215.237.1:8123/box?key=Z"
@@ -39,6 +46,7 @@ curl "http://129.215.237.1:8123/noBox?key=Z"
 ```
 
 ## Box json
+
 ```{r}
 library(httr)
 r = GET("http://129.215.237.1:8123/box?key=A")
